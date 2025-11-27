@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geisler Jiménez Torres | Portafolio Académico</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --primary: #00d4ff;
+            --secondary: #ff6b35;
+            --accent: #7c3aed;
+            --dark: #0a0a0a;
+            --light: #ffffff;
+            --gray: #6b7280;
+            --bg-dark: #111827;
+            --bg-darker: #030712;
+            --neon-blue: #00f5ff;
+            --neon-purple: #bf00ff;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background: var(--bg-darker);
+            color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #0a0a0a, #1a1a2e, #16213e, #0f3460);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        .animated-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 25% 25%, #00d4ff22 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, #7c3aed22 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, #ff6b3522 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+        }
+
+        /* Particle system */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: particleFloat 6s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) translateX(0px); opacity: 1; }
+            100% { transform: translateY(-100px) translateX(100px); opacity: 0; }
+        }
+
+        /* Main container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        /* Header section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .profile-container {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid transparent;
+            background: linear-gradient(45deg, var(--primary), var(--accent), var(--secondary));
+            padding: 4px;
+            animation: profileGlow 3s ease-in-out infinite alternate;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        @keyframes profileGlow {
+            0% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.5); }
+            100% { box-shadow: 0 0 40px rgba(124, 58, 237, 0.8), 0 0 60px rgba(255, 107, 53, 0.4); }
+        }
+
+        .glitch-text {
+            font-family: 'Orbitron', monospace;
+            font-size: 4rem;
+            font-weight: 900;
+            margin: 2rem 0;
+            position: relative;
+            color: var(--light);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0;
+            animation: glitchIn 1.2s cubic-bezier(.68,-0.55,.27,1.55) 0.2s forwards;
+        }
+
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        @keyframes glitchIn {
+            0% { opacity: 0; transform: scale(0.8) skewX(10deg);}
+            60% { opacity: 1; transform: scale(1.05) skewX(-5deg);}
+            100% { opacity: 1; transform: scale(1) skewX(0);}
+        }
+
+        .glitch-text::before {
+            animation: glitch-1 2s linear infinite;
+            color: var(--primary);
+            z-index: -1;
+        }
+
+        .glitch-text::after {
+            animation: glitch-2 2s linear infinite;
+            color: var(--secondary);
+            z-index: -2;
+        }
+
+        @keyframes glitch-1 {
+            0%, 14%, 15%, 49%, 50%, 99%, 100% { transform: translate(0); }
+            15%, 49% { transform: translate(-2px, -1px); }
+        }
+
+        @keyframes glitch-2 {
+            0%, 20%, 21%, 62%, 63%, 99%, 100% { transform: translate(0); }
+            21%, 62% { transform: translate(2px, 1px); }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--gray);
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.5s forwards;
+        }
+
+        .school-tag {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            color: var(--primary);
+            font-weight: 600;
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 1s ease 1s forwards;
+        }
+
+        .school-tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.2), transparent);
+            transition: 0.6s;
+        }
+
+        .school-tag:hover::before {
+            left: 100%;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Navigation */
+        .nav-scroll {
+            position: fixed;
+            top: 50%;
+            right: 2rem;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 1rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-dot.active,
+        .nav-dot:hover {
+            background: var(--primary);
+            box-shadow: 0 0 20px var(--primary);
+            transform: scale(1.5);
+        }
+
+        /* Projects section */
+        .section {
+            min-height: 100vh;
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--light);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        /* Project card */
+        .project-card {
+            background: rgba(17, 24, 39, 0.8);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(0, 212, 255, 0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-card:hover {
+            /*transform: translateY(-10px);*/
+            border-color: var(--primary);
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 0 40px 10px var(--primary), 0 20px 40px rgba(0, 212, 255, 0.2);
+            /*border-color: var(--accent);*/
+            transform: scale(1.04) translateY(-10px);
+        }
+
+        .project-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .project-card:hover .project-icon {
+            animation: bounce 0.6s;
+            transform: rotateY(180deg) scale(1.1);
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--light);
+            pointer-events: none;
+        }
+
+        .project-desc {
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            pointer-events: none;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .project-card:hover .project-link {
+            gap: 1rem;
+            color: var(--light);
+        }
+
+        /* Contact section - Simplified */
+        .contact-section {
+            text-align: center;
+            padding: 4rem 0 4rem;
+            min-height: auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .social-link {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(17, 24, 39, 0.8);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: var(--dark);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.4);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+            background: rgba(3, 7, 18, 0.7);
+            backdrop-filter: blur(5px);
+            border-radius: 1rem;
+            width: 100%;
+            max-width: 2000px;
+            margin: 2rem auto 0 auto;
+        }
+
+        .project-1 .project-icon {
+            background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%); /* azul */
+        }
+
+        .project-2 .project-icon {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); /* verde */
+        }
+
+        .project-3 .project-icon {
+            background: linear-gradient(135deg, #ff6a00 0%, #ee0979 100%); /* naranja-rosado */
+        }
+
+        /* Segunda fila, cambia el orden */
+        .project-4 .project-icon {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); /* verde */
+        }
+
+        .project-5 .project-icon {
+            background: linear-gradient(135deg, #ff6a00 0%, #ee0979 100%); /* naranja-rosado */
+        }
+
+        .project-6 .project-icon {
+            background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%); /* azul */
+        }
+
+        /* Tercera fila, cambia otra vez */
+        .project-7 .project-icon {
+            background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%); /* azul */
+        }
+
+        .project-8 .project-icon {
+            background: linear-gradient(135deg, #ff6a00 0%, #ee0979 100%); /* naranja-rosado */
+        }
+
+        .project-9 .project-icon {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); /* verde */
+        }
+
+
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .glitch-text {
+                font-size: 2.5rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .nav-scroll {
+                display: none;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .profile-img {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .social-link {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg"></div>
+    <div class="particles" id="particles"></div>
+    
+    <div class="nav-scroll">
+        <div class="nav-dot active" data-section="hero"></div>
+        <div class="nav-dot" data-section="projects"></div>
+    </div>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+            <div class="hero-content">
+                <div class="profile-container">
+                    <img src="/Imagenes/Um.jpeg" alt="Geisler Jiménez Torres" class="profile-img">
+                </div>
+                <h1 class="glitch-text" data-text="GEISLER JIMÉNEZ">GEISLER JIMÉNEZ TORRES</h1>
+                <h2 class="subtitle">Portafolio Académico</h2>
+                <div class="school-tag">
+                    Escuela Preparatoria "Profr. Ignacio Carrillo Franco"
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="section" id="projects">
+            <div class="section-title">
+                <h2>Contenido</h2>
+            </div>
+            
+            <div class="projects-grid">
+                <!-- Personal Projects -->
+                <a href="/Personal/MVC.html" class="project-card project-1">
+                    <div class="project-icon">
+                        <i class="fas fa-binoculars"></i>
+                    </div>
+                    <h3 class="project-title">Misión, Visión y Cosmovisión</h3>
+                    <p class="project-desc">Mi enfoque personal y profesional hacia el futuro</p>
+                    <span class="project-link">Explorar <i class="fas fa-arrow-right"></i></span>
+                </a>
+
+                <a href="/Personal/Autobiografia.html" class="project-card project-2">
+                    <div class="project-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3 class="project-title">Autobiografía</h3>
+                    <p class="project-desc">Mi trayectoria y experiencia de vida</p>
+                    <span class="project-link">Explorar <i class="fas fa-arrow-right"></i></span>
+                </a>
+
+                <a href="/Personal/Metas.html" class="project-card project-3">
+                    <div class="project-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3 class="project-title">Metas y Objetivos</h3>
+                    <p class="project-desc">Objetivos personales y profesionales</p>
+                    <span class="project-link">Explorar <i class="fas fa-arrow-right"></i></span>
+                </a>
+
+                <!-- Competencias -->
+                <a href="/Competencias/Matematicas.html" class="project-card project-4">
+                    <div class="project-icon">
+                        <i class="bi bi-calculator"></i>
+                    </div>
+                    <h3 class="project-title">Competencias Matemáticas</h3>
+                    <p class="project-desc">Proyectos y habilidades matemáticas aplicadas</p>
+                    <span class="project-link">Explorar <i class="fas fa-arrow-right"></i></span>
+                </a>
+
+                <a href="/Competencias/CienciasExperimentales.html" class="project-card project-5">
+                    <div class="project-icon">
+                        <i class="fas fa-vials"></i>
+                    </div>
+                    <h3 class="project-title">Competencias Ciencias Experimentales</h3>
+                    <p class="project-desc">Investigación y experimentación científica avanzada</p>
+                    <span class="project-link">Explorar <i class="fas fa-arrow-right"></i></span>
+                </a>
+
+                <a href="/Competencias/CienciasSociales.html" class="project-card project-6">
+                    <div class="project-icon">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h3 class="project-title">Competencias Ciencias Sociales</h3>
+                    <p class="project-desc">Análisis y comprensión del entorno social contemporáneo</p>
+                    <span class="project-link">Explorar <i class="fas fa-arrow-right"></i></span>
+                </a>
+
+                <a href="/Competencias/Comunicacion.html" class="project-card project-7">
+                    <div class="project-icon">
+                        <i class="fa-regular fa-comments"></i>
+                    </div>
+                    <h3 class="project-title">Competencias Comunicación</h3>
+                    <p class="project-desc">Habilidades de expresión y comunicación moderna</p>
+                    <span class="project-link">Explorar <i class="fas fa-arrow-right"></i></span>
+                </a>
+
+                <a href="/Competencias/Genericas.html" class="project-card project-8">
+                    <div class="project-icon">
+                        <i class="fa-solid fa-globe"></i>
+                    </div>
+                    <h3 class="project-title">Competencias Genéricas</h3>
+                    <p class="project-desc">Habilidades transversales y pensamiento crítico</p>
+                    <span class="project-link">Explorar <i class="fas fa-arrow-right"></i></span>
+                </a>
+
+                <a href="/Personal/Reflexion.html" class="project-card project-9">
+                    <div class="project-icon">
+                        <i class="bi bi-lightbulb"></i>
+                    </div>
+                    <h3 class="project-title">Reflexión Personal</h3>
+                    <p class="project-desc">Análisis introspectivo y aprendizaje continuo</p>
+                    <span class="project-link">Explorar <i class="fas fa-arrow-right"></i></span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Contact Section - Simplified -->
+        <section class="contact-section" id="contact">
+            <div class="section-title">
+                <h2>CONTACTAME</h2>
+            </div>
+            
+            <div class="social-links">
+                <a href="https://www.youtube.com/" target="_blank" class="social-link" title="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://www.instagram.com/" target="_blank" class="social-link" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://trello.com/" target="_blank" class="social-link" title="Trello">
+                    <i class="fab fa-trello"></i>
+                </a>
+                <a href="https://www.ea.com/es-es/games/fifa" target="_blank" class="social-link" title="FIFA">
+                    <i class="fas fa-futbol"></i>
+                </a>
+                <a href="mailto:tuemail@gmail.com" target="_blank" class="social-link" title="Gmail">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://www.codecademy.com/" target="_blank" class="social-link" title="Codecademy">
+                    <i class="fas fa-code"></i>
+                </a>
+                <a href="https://open.spotify.com/" target="_blank" class="social-link" title="Spotify">
+                    <i class="fab fa-spotify"></i>
+                </a>
+                <a href="https://wa.me/8262135314" target="_blank" class="social-link" title="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </div>
+        </section>
+        
+        <footer class="footer">
+            <p>© 2025 Geisler Jiménez Torres | Portafolio Académico</p>
+        </footer>
+    </div>
+
+    <script>
+        // Particle system
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const colors = ['#00d4ff', '#7c3aed', '#ff6b35'];
+            
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Navigation dots
+        function setupNavigation() {
+            const navDots = document.querySelectorAll('.nav-dot');
+            const sections = document.querySelectorAll('.section, .hero');
+
+            navDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    sections[index].scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+
+            // Update active dot on scroll
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach((section, index) => {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top <= 100 && rect.bottom >= 100) {
+                        current = index;
+                    }
+                });
+
+                navDots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === current);
+                });
+            });
+        }
+
+        // Project cards animation
+        function setupProjectCards() {
+            const cards = document.querySelectorAll('.project-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(50px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            setupNavigation();
+            setupProjectCards();
+        });
+
+        // Add floating animation to hero elements
+        const heroContent = document.querySelector('.hero-content');
+        let mouseX = 0, mouseY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth - 0.5) * 20;
+            mouseY = (e.clientY / window.innerHeight - 0.5) * 20;
+            heroContent.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+
+            // Partículas interactivas
+            document.querySelectorAll('.particle').forEach(p => {
+                const rect = p.getBoundingClientRect();
+                const dx = e.clientX - rect.left;
+                const dy = e.clientY - rect.top;
+                if (Math.sqrt(dx*dx + dy*dy) < 80) {
+                    p.style.opacity = 1;
+                    p.style.background = '#fff';
+                } else {
+                    p.style.opacity = 0.7;
+                    p.style.background = p.dataset.color || p.style.background;
+                }
+            });
+        });
+
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', () => {
+                localStorage.setItem('scrollY', window.scrollY);
+            });
+        });
+
+        // Restaura la posición cuando vuelves desde otra página
+        window.addEventListener('load', () => {
+            const scrollY = localStorage.getItem('scrollY');
+            if (scrollY !== null) {
+                window.scrollTo(0, parseInt(scrollY));
+                localStorage.removeItem('scrollY');
+            }
+        });
+    </script>
+</body>
+</html>

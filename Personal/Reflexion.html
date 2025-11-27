@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reflexiones | Portafolio Académico</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #11998e;
+            --secondary: #38ef7d;
+            --accent: #0d7a6f;
+            --bright: #fcf3cf;
+            --deep: #d4ac0d;
+            --darker: #b7950b;
+            --success: #58d68d;
+            --dark: #041a18;
+            --darker-bg: #020f0e;
+            --light: #f0fffe;
+            --cream: #fdf6e3;
+            --soft-yellow: #f9e79f;
+            --glass: rgba(17, 153, 142, 0.1);
+            --glass-border: rgba(17, 153, 142, 0.2);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(-45deg, #020f0e, #041a18, #0d2e2a, #183f3a);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
+            min-height: 100vh;
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 30s infinite linear;
+            box-shadow: 0 0 15px rgba(17, 153, 142, 0.2);
+        }
+
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            left: 10%;
+            background: radial-gradient(circle, rgba(17, 153, 142, 0.15), rgba(17, 153, 142, 0.03));
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            left: 80%;
+            background: radial-gradient(circle, rgba(56, 239, 125, 0.15), rgba(56, 239, 125, 0.03));
+            animation-delay: 10s;
+        }
+
+        .shape:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            left: 45%;
+            background: radial-gradient(circle, rgba(13, 122, 111, 0.15), rgba(13, 122, 111, 0.03));
+            animation-delay: 20s;
+        }
+
+        .shape:nth-child(4) {
+            width: 120px;
+            height: 120px;
+            left: 70%;
+            background: radial-gradient(circle, rgba(240, 255, 254, 0.15), rgba(240, 255, 254, 0.03));
+            animation-delay: 15s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+            background: rgba(4, 26, 24, 0.85);
+            border: 2px solid rgba(17, 153, 142, 0.4);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(17, 153, 142, 0.25);
+            animation: slideInDown 1s ease-out;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(17, 153, 142, 0.5);
+            box-shadow: 0 8px 20px rgba(17, 153, 142, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.03) rotate(3deg);
+            border-color: rgba(56, 239, 125, 0.7);
+            box-shadow: 0 12px 25px rgba(17, 153, 142, 0.3);
+        }
+
+        .header-text h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #f0fffe;
+            text-shadow: 1px 1px 6px rgba(17, 153, 142, 0.3);
+            margin-bottom: 0.5rem;
+        }
+
+        .header-text h2, .header-text h3 {
+            font-size: 1.2rem;
+            color: rgba(240, 255, 254, 0.85);
+            font-weight: 300;
+            text-shadow: 1px 1px 4px rgba(17, 153, 142, 0.2);
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff, #f0fffe, #11998e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            border-radius: 2px;
+            box-shadow: 0 2px 8px rgba(17, 153, 142, 0.3);
+        }
+
+        .navigation-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 2rem 0;
+            gap: 1rem;
+        }
+
+        .nav-button, .back-button {
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, rgba(17, 153, 142, 0.85), rgba(56, 239, 125, 0.85));
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(17, 153, 142, 0.5);
+            border-radius: 50px;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            text-shadow: 1px 1px 4px rgba(2, 15, 14, 0.8);
+            box-shadow: 0 4px 15px rgba(17, 153, 142, 0.3);
+        }
+
+        .nav-button::before, .back-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(56, 239, 125, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-button:hover::before, .back-button:hover::before {
+            left: 100%;
+        }
+
+        .nav-button:hover, .back-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(17, 153, 142, 0.5);
+            background: linear-gradient(135deg, rgba(17, 153, 142, 0.95), rgba(56, 239, 125, 0.95));
+            border-color: rgba(56, 239, 125, 0.8);
+        }
+
+        .year-indicator {
+            text-align: center;
+            margin: 2rem 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 2px 2px 10px rgba(17, 153, 142, 0.7);
+            background: linear-gradient(135deg, rgba(4, 26, 24, 0.85), rgba(17, 153, 142, 0.25));
+            padding: 1rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(17, 153, 142, 0.4);
+            box-shadow: 0 4px 20px rgba(17, 153, 142, 0.2);
+        }
+
+        .reflection-container {
+            margin: 3rem 0;
+        }
+
+        .reflection-card {
+            backdrop-filter: blur(20px);
+            background: rgba(4, 26, 24, 0.75);
+            border: 1px solid rgba(17, 153, 142, 0.3);
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 25px rgba(2, 15, 14, 0.4), 0 4px 15px rgba(17, 153, 142, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+
+        @keyframes slideInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reflection-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #11998e, #38ef7d, #0d7a6f);
+            border-radius: 3px 3px 0 0;
+        }
+
+        .reflection-card:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 15px 35px rgba(17, 153, 142, 0.25), 0 8px 20px rgba(2, 15, 14, 0.5);
+            background: rgba(4, 26, 24, 0.85);
+            border-color: rgba(17, 153, 142, 0.4);
+        }
+
+        .reflection-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: rgba(240, 255, 254, 0.9);
+            text-shadow: 1px 1px 3px rgba(2, 15, 14, 0.5);
+            text-align: justify;
+        }
+
+        .reflection-quote {
+            background: rgba(17, 153, 142, 0.15);
+            padding: 2rem;
+            border-radius: 20px;
+            margin: 2rem 0;
+            position: relative;
+            border-left: 4px solid #11998e;
+            backdrop-filter: blur(10px);
+            font-style: italic;
+            font-size: 1.2rem;
+            color: #f0fffe;
+            text-shadow: 1px 1px 3px rgba(2, 15, 14, 0.3);
+            font-weight: 400;
+        }
+
+        .reflection-quote::before {
+            content: '"';
+            position: absolute;
+            top: -15px;
+            left: 15px;
+            font-size: 3.5rem;
+            color: rgba(17, 153, 142, 0.3);
+            font-family: serif;
+            line-height: 1;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            backdrop-filter: blur(20px);
+            background: linear-gradient(135deg, rgba(4, 26, 24, 0.7), rgba(17, 153, 142, 0.15));
+            border: 1px solid rgba(17, 153, 142, 0.3);
+            border-radius: 24px;
+            color: rgba(240, 255, 254, 0.85);
+            text-shadow: 1px 1px 3px rgba(2, 15, 14, 0.4);
+            box-shadow: 0 8px 25px rgba(17, 153, 142, 0.15);
+        }
+
+        /* Efecto de partículas en hover más sutil */
+        .reflection-card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(17, 153, 142, 0.08), transparent);
+            transform: translate(-50%, -50%);
+            transition: all 0.6s ease;
+            pointer-events: none;
+        }
+
+        .reflection-card:hover::after {
+            width: 250px;
+            height: 250px;
+        }
+
+        /* Animación de texto más suave */
+        .typing-animation {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid rgba(240, 255, 254, 0.7);
+            animation: typing 4s steps(40, end), blink 1s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            from, to { border-color: transparent; }
+            50% { border-color: rgba(240, 255, 254, 0.7); }
+        }
+
+        /* Efectos de brillo más sutiles */
+        .header, .reflection-card, .nav-button, .back-button {
+            position: relative;
+        }
+
+        .header:hover, .reflection-card:hover, .nav-button:hover, .back-button:hover {
+            box-shadow: 0 0 20px rgba(17, 153, 142, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .profile-section {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .header-text h1 {
+                font-size: 2rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .navigation-section {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-button, .back-button {
+                width: 100%;
+                text-align: center;
+            }
+
+            .reflection-card {
+                padding: 1.5rem;
+            }
+
+            .reflection-content p {
+                font-size: 1rem;
+            }
+
+            .reflection-quote {
+                padding: 1.5rem;
+                font-size: 1.1rem;
+            }
+
+            .reflection-quote::before {
+                font-size: 3rem;
+                top: -12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <div class="profile-section">
+                <img src="/Imagenes/Um.jpeg" alt="Geisler Jiménez Torres" class="profile-image">
+                <div class="header-text">
+                    <h1 class="typing-animation">Geisler Jiménez Torres</h1>
+                    <h2>Portafolio Académico</h2>
+                    <h3>Escuela Preparatoria "Profr. Ignacio Carrillo Franco"</h3>
+                </div>
+            </div>
+        </header>
+
+        <div class="navigation-section">
+            <a href="/Paginas/Menu.html" class="back-button">
+                <i class="bi bi-arrow-left"></i> Regresar al Menú
+            </a>
+        </div>
+
+        <div class="section-title">
+            <h2><i class="bi bi-lightbulb"></i> Mis Reflexiones Académicas</h2>
+        </div>
+
+        <div class="navigation-section">
+            <a href="/Personal/Reflexion.html" class="nav-button">
+                <i class="bi bi-calendar-check"></i> Primer Año
+            </a>
+            <a href="/Personal/Reflexion2.html" class="nav-button">
+                <i class="bi bi-calendar2-plus"></i> Segundo Año
+            </a>
+        </div>
+
+        <div class="year-indicator">
+            <i class="fa-solid fa-book"></i>&nbsp; Primer Año &nbsp;<i class="fa-solid fa-book"></i>
+        </div>
+
+        <div class="reflection-container">
+            <div class="reflection-card">
+                <div class="reflection-content">
+                    <p>En este primer año que he pasado por la Preparatoria Ignacio Carrillo Franco, he aprendido que no puedes aplazar lo que se tiene que hacer, y que una buena organización es la clave del éxito. Las actividades que se realizan en la preparatoria han sido de mucho beneficio para mí, y eso se agradece.</p>
+                    
+                    <div class="reflection-quote">
+                        "El conocimiento es la herramienta más poderosa cuando se aplica con disciplina"
+                    </div>
+                    
+                    <p>He aprendido que nadie lo sabe todo; sin embargo, los conceptos y aprendizajes obtenidos anteriormente han sido de gran ayuda para entender con mayor facilidad estos nuevos temas. Aun así, en todo momento se aprenden cosas nuevas.</p>
+                    
+                    <p>También he mejorado la habilidad de trabajar en equipo. Después de todo, si todos ponen de su parte, se puede obtener un buen resultado, pero siempre hay que estar cooperando. Hubo muchos momentos en los que pude haber visto afectado mi rendimiento, ya que estar saturado con actividades fuera de la escuela consume mucho tiempo, pero con la ayuda de Dios este año ha sido de gran beneficio.</p>
+                    
+                    <p>Puedo decir con certeza que he superado todas mis metas, y ahora estoy listo para recibir el próximo año que está por comenzar.</p>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>© 2025 Portafolio Académico de Geisler Jiménez Torres. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Animación de entrada escalonada para las tarjetas
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.reflection-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 200);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+
+            // Efecto de partículas en click
+            cards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const ripple = document.createElement('span');
+                    ripple.style.cssText = `
+                        position: absolute;
+                        left: ${x}px;
+                        top: ${y}px;
+                        width: 0;
+                        height: 0;
+                        border-radius: 50%;
+                        background: rgba(255, 215, 0, 0.3);
+                        transform: translate(-50%, -50%);
+                        animation: ripple 0.6s linear;
+                        pointer-events: none;
+                    `;
+                    
+                    card.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+
+            // Añadir animación de ripple
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes ripple {
+                    to {
+                        width: 200px;
+                        height: 200px;
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+
+        // Parallax suave para formas flotantes
+        document.addEventListener('mousemove', (e) => {
+            const shapes = document.querySelectorAll('.shape');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            shapes.forEach((shape, index) => {
+                const speed = (index + 1) * 0.5;
+                const xPos = (x - 0.5) * speed * 20;
+                const yPos = (y - 0.5) * speed * 20;
+                
+                shape.style.transform = `translate(${xPos}px, ${yPos}px)`;
+            });
+        });
+    </script>
+</body>
+</html>

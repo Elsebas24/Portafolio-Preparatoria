@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Metas | Portafolio Académico</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ff6a00;
+            --secondary: #ee0979;
+            --accent: #ff4500;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #1a0f0a;
+            --darker: #0f0804;
+            --light: #fff5f2;
+            --gray: #64748b;
+            --glass: rgba(255, 106, 0, 0.12);
+            --glass-border: rgba(255, 106, 0, 0.25);
+            --neon-orange: #ff6a00;
+            --tech-pink: #ee0979;
+            --crimson: #e91e63;
+            --coral: #ff5722;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(-45deg, #0f0804, #1a0f0a, #2d1a10, #3f2618);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 25s infinite linear;
+        }
+
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            left: 10%;
+            background: rgba(255, 106, 0, 0.15);
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            left: 80%;
+            background: rgba(238, 9, 121, 0.15);
+            animation-delay: 8s;
+        }
+
+        .shape:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            left: 45%;
+            background: rgba(255, 69, 0, 0.15);
+            animation-delay: 16s;
+        }
+
+        .shape:nth-child(4) {
+            width: 120px;
+            height: 120px;
+            left: 25%;
+            background: rgba(233, 30, 99, 0.15);
+            animation-delay: 5s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+            background: rgba(26, 15, 10, 0.85);
+            border: 2px solid rgba(255, 106, 0, 0.4);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(255, 106, 0, 0.25);
+            animation: slideInDown 1s ease-out;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255, 106, 0, 0.7);
+            box-shadow: 0 10px 30px rgba(255, 106, 0, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.05) rotate(5deg);
+            border-color: rgba(238, 9, 121, 0.9);
+            box-shadow: 0 15px 40px rgba(255, 106, 0, 0.6);
+        }
+
+        .header-text h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fff5f2;
+            text-shadow: 2px 2px 12px rgba(255, 106, 0, 0.6);
+            margin-bottom: 0.5rem;
+        }
+
+        .header-text h2 {
+            font-size: 1.2rem;
+            color: rgba(255, 245, 242, 0.9);
+            font-weight: 300;
+            text-shadow: 1px 1px 6px rgba(255, 106, 0, 0.4);
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #ffccbc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+            position: relative;
+            text-shadow: 0 0 25px rgba(255, 106, 0, 0.4);
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #ff6a00, #ee0979);
+            border-radius: 2px;
+            box-shadow: 0 2px 10px rgba(255, 106, 0, 0.5);
+        }
+
+        .navigation-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 2rem 0;
+            gap: 1rem;
+        }
+
+        .nav-button, .back-button {
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #ff6a00 0%, #ee0979 100%);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 106, 0, 0.5);
+            border-radius: 50px;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            text-shadow: 1px 1px 4px rgba(15, 8, 4, 0.8);
+            box-shadow: 0 4px 15px rgba(255, 106, 0, 0.3);
+        }
+
+        .nav-button::before, .back-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(238, 9, 121, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-button:hover::before, .back-button:hover::before {
+            left: 100%;
+        }
+
+        .nav-button:hover, .back-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(255, 106, 0, 0.5);
+            background: linear-gradient(135deg, #ff8a00 0%, #f206a0 100%);
+            border-color: rgba(238, 9, 121, 0.8);
+        }
+
+        .year-indicator {
+            text-align: center;
+            margin: 2rem 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 2px 2px 10px rgba(255, 106, 0, 0.7);
+            background: linear-gradient(135deg, rgba(26, 15, 10, 0.85), rgba(255, 106, 0, 0.25));
+            padding: 1rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 106, 0, 0.4);
+            box-shadow: 0 4px 20px rgba(255, 106, 0, 0.2);
+        }
+
+        .goals-container {
+            display: grid;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .goal-card {
+            backdrop-filter: blur(20px);
+            background: rgba(26, 15, 10, 0.85);
+            border: 2px solid rgba(255, 106, 0, 0.4);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 32px rgba(15, 8, 4, 0.5);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+
+        @keyframes slideInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .goal-card:nth-child(1) { animation-delay: 0.2s; }
+        .goal-card:nth-child(2) { animation-delay: 0.4s; }
+        .goal-card:nth-child(3) { animation-delay: 0.6s; }
+
+        .goal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            border-radius: 4px 4px 0 0;
+        }
+
+        .short-term::before {
+            background: linear-gradient(90deg, #ff6a00, #ff8a65);
+        }
+
+        .mid-term::before {
+            background: linear-gradient(90deg, #ee0979, #f48fb1);
+        }
+
+        .long-term::before {
+            background: linear-gradient(90deg, #ff4500, #ff7043);
+        }
+
+        .goal-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(255, 106, 0, 0.4);
+            background: rgba(26, 15, 10, 0.95);
+            border-color: rgba(255, 106, 0, 0.6);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            box-shadow: 0 8px 20px rgba(15, 8, 4, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .short-term .card-icon {
+            background: linear-gradient(135deg, #ff6a00, #ff8a65);
+            box-shadow: 0 8px 20px rgba(255, 106, 0, 0.4);
+        }
+
+        .mid-term .card-icon {
+            background: linear-gradient(135deg, #ee0979, #f48fb1);
+            box-shadow: 0 8px 20px rgba(238, 9, 121, 0.4);
+        }
+
+        .long-term .card-icon {
+            background: linear-gradient(135deg, #ff4500, #ff7043);
+            box-shadow: 0 8px 20px rgba(255, 69, 0, 0.4);
+        }
+
+        .card-icon:hover {
+            transform: rotate(360deg) scale(1.1);
+        }
+
+        .goal-card h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff5f2;
+            text-shadow: 2px 2px 8px rgba(15, 8, 4, 0.8);
+        }
+
+        .goal-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .goal-card li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: rgba(255, 245, 242, 0.9);
+            text-shadow: 1px 1px 4px rgba(15, 8, 4, 0.7);
+        }
+
+        .goal-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 106, 0, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 2px 8px rgba(255, 106, 0, 0.4);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            backdrop-filter: blur(20px);
+            background: linear-gradient(135deg, rgba(26, 15, 10, 0.85), rgba(255, 106, 0, 0.25));
+            border: 2px solid rgba(255, 106, 0, 0.4);
+            border-radius: 24px;
+            color: rgba(255, 245, 242, 0.9);
+            text-shadow: 1px 1px 4px rgba(15, 8, 4, 0.6);
+            box-shadow: 0 8px 32px rgba(255, 106, 0, 0.2);
+        }
+
+        /* Efecto de partículas en hover */
+        .goal-card::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 106, 0, 0.15), transparent);
+            transform: translate(-50%, -50%);
+            transition: all 0.6s ease;
+            pointer-events: none;
+        }
+
+        .goal-card:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Animación de texto */
+        .typing-animation {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid #fff5f2;
+            animation: typing 3s steps(40, end), blink 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            from, to { border-color: transparent; }
+            50% { border-color: #fff5f2; }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .profile-section {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .header-text h1 {
+                font-size: 2rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .navigation-section {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-button, .back-button {
+                width: 100%;
+                text-align: center;
+            }
+
+            .goal-card {
+                padding: 1.5rem;
+            }
+
+            .goal-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .goal-card li {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <div class="profile-section">
+                <img src="/Imagenes/Um.jpeg" alt="Geisler Jiménez Torres" class="profile-image">
+                <div class="header-text">
+                    <h1 class="typing-animation">Geisler Jiménez Torres</h1>
+                    <h2>Portafolio Académico</h2>
+                    <h2>Escuela Preparatoria "Profr. Ignacio Carrillo Franco"</h2>
+                </div>
+            </div>
+        </header>
+
+        <div class="navigation-section">
+            <a href="/Paginas/Menu.html" class="back-button">
+                <i class="bi bi-arrow-left"></i> Regresar al Menú
+            </a>
+        </div>
+
+        <div class="section-title">
+            <h2><i class="bi bi-bullseye"></i> Mis Metas Académicas y Personales</h2>
+        </div>
+
+        <div class="navigation-section">
+            <a href="/Personal/Metas.html" class="nav-button">
+                <i class="bi bi-calendar-check"></i> Primer Año
+            </a>
+            <a href="/Personal/Metas2.html" class="nav-button">
+                <i class="bi bi-calendar2-plus"></i> Segundo Año
+            </a>
+        </div>
+
+        <div class="year-indicator">
+            <i class="fa-solid fa-user-graduate"></i>&nbsp; Segundo Año &nbsp;<i class="fa-solid fa-user-graduate"></i>
+        </div>
+
+        <div class="goals-container">
+            <div class="goal-card short-term">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="bi bi-calendar-week"></i>
+                    </div>
+                    <h3>Corto Plazo</h3>
+                </div>
+                <ul>
+                        <li>Terminar la preparatoria</li>
+                        <li>Entrar a la carrera</li>
+                        <li>Consolidarme como titular en el equipo de fútbol</li>
+                        <li>Terminar de ser un líder en mi iglesia</li>
+                        <li>Ser un master en guías mayores</li>
+                        <li>Conseguir mi equipo para realizar trabajos de programación mayor</li>
+                    </ul>
+            </div>
+
+            <div class="goal-card mid-term">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="bi bi-calendar-month"></i>
+                    </div>
+                    <h3>Mediano Plazo</h3>
+                </div>
+                <ul>
+                        <li>Ser anciano de la iglesia</li>
+                        <li>Rendir correctamente en la carrera</li>
+                        <li>Poder establecerme totalmente en mi trabajo</li>
+                        <li>Tener una comprensión mayor de toda la biblia y misterios históricos</li>
+                        <li>Tener un amplio conocimiento físico y matemático</li>
+                </ul>
+            </div>
+
+            <div class="goal-card long-term">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="bi bi-calendar-check"></i>
+                    </div>
+                    <h3>Largo Plazo</h3>
+                </div>
+                <ul>
+                        <li>Lograr el máximo de estudio como un doctor</li>
+                        <li>Formar una familia</li>
+                        <li>Desarrollar una empresa competitiva en ramas de programación e ingeniería</li>
+                        <li>Tener un patrimonio para mis generaciones</li>
+                        <li>Poder disfrutar de la vida con la gente que aprecio</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>© 2025 Portafolio Académico de Geisler Jiménez Torres. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Animación de entrada escalonada para las tarjetas
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.goal-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 200);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+
+            // Efecto de partículas en click
+            cards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const ripple = document.createElement('span');
+                    ripple.style.cssText = `
+                        position: absolute;
+                        left: ${x}px;
+                        top: ${y}px;
+                        width: 0;
+                        height: 0;
+                        border-radius: 50%;
+                        background: rgba(255, 255, 255, 0.3);
+                        transform: translate(-50%, -50%);
+                        animation: ripple 0.6s linear;
+                        pointer-events: none;
+                    `;
+                    
+                    card.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+
+            // Añadir animación de ripple
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes ripple {
+                    to {
+                        width: 200px;
+                        height: 200px;
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+
+        // Parallax suave para formas flotantes
+        document.addEventListener('mousemove', (e) => {
+            const shapes = document.querySelectorAll('.shape');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            shapes.forEach((shape, index) => {
+                const speed = (index + 1) * 0.5;
+                const xPos = (x - 0.5) * speed * 20;
+                const yPos = (y - 0.5) * speed * 20;
+                
+                shape.style.transform = `translate(${xPos}px, ${yPos}px)`;
+            });
+        });
+
+        // Animación adicional para los iconos de las metas
+        document.addEventListener('DOMContentLoaded', function() {
+            const icons = document.querySelectorAll('.card-icon');
+            
+            icons.forEach(icon => {
+                icon.addEventListener('mouseenter', function() {
+                    this.style.transform = 'rotate(360deg) scale(1.1)';
+                });
+                
+                icon.addEventListener('mouseleave', function() {
+                    this.style.transform = 'rotate(0deg) scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
